@@ -1,0 +1,49 @@
+﻿@model ML.Hospital
+@{
+    ViewData["Title"] = "GetAll";
+}
+<div class="flex-column">
+    <h1 class="text-center"> Hospitales</h1>
+    <a class="btn btn-outline-success float-end" href="@Url.Action("Form", "Hospital")">Agregar</a>
+</div>
+@if (Model == null)
+{
+    <div class="alert alert-warning" role="alert">
+        ocurrio un error!
+    </div>
+}
+else
+{
+    <div class=" table-responsive">
+        <table class="table table-dark table-hover" id="tabla">
+            <thead class="table-secondary">
+                <tr class="text-center">
+                    <th>editar</th>
+                    <th>IdHospital</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Año de construccion</th>
+                    <th>Capacidad</th>
+                    <th>IdEspecialidad</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Hospital hospital in Model.Hospitals)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("Editar", "Hospital", new { IdHospital = hospital.IdHospital})" class="btn btn-warning">Editar</a> </td>
+                        <td>@hospital.IdHospital</td>
+                        <td>@hospital.Nombre</td>
+                        <td>@hospital.Direccion</td>
+                        <td>@hospital.AñoDeConstruccion</td>
+                        <td>@hospital.Capacidad</td>
+                        <td>@hospital.IdEspecialidad</td>
+                        <td><a href="@Url.Action("Delete", "Hospital", new{IdHospital = hospital.IdHospital})" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
